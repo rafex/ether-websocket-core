@@ -34,44 +34,44 @@ import java.util.Optional;
 
 public final class WebSocketPatterns {
 
-	private WebSocketPatterns() {
-	}
+    private WebSocketPatterns() {
+    }
 
-	public static Optional<Map<String, String>> match(final String pattern, final String path) {
-		if (pattern == null || pattern.isBlank() || path == null || path.isBlank()) {
-			return Optional.empty();
-		}
-		if ("/**".equals(pattern)) {
-			return Optional.of(Map.of());
-		}
+    public static Optional<Map<String, String>> match(final String pattern, final String path) {
+        if (pattern == null || pattern.isBlank() || path == null || path.isBlank()) {
+            return Optional.empty();
+        }
+        if ("/**".equals(pattern)) {
+            return Optional.of(Map.of());
+        }
 
-		final var patternSegments = split(pattern);
-		final var pathSegments = split(path);
-		if (patternSegments.size() != pathSegments.size()) {
-			return Optional.empty();
-		}
+        final var patternSegments = split(pattern);
+        final var pathSegments = split(path);
+        if (patternSegments.size() != pathSegments.size()) {
+            return Optional.empty();
+        }
 
-		final var params = new LinkedHashMap<String, String>();
-		for (int i = 0; i < patternSegments.size(); i++) {
-			final var expected = patternSegments.get(i);
-			final var actual = pathSegments.get(i);
-			if (expected.startsWith("{") && expected.endsWith("}")) {
-				params.put(expected.substring(1, expected.length() - 1), actual);
-				continue;
-			}
-			if (!expected.equals(actual)) {
-				return Optional.empty();
-			}
-		}
+        final var params = new LinkedHashMap<String, String>();
+        for (int i = 0; i < patternSegments.size(); i++) {
+            final var expected = patternSegments.get(i);
+            final var actual = pathSegments.get(i);
+            if (expected.startsWith("{") && expected.endsWith("}")) {
+                params.put(expected.substring(1, expected.length() - 1), actual);
+                continue;
+            }
+            if (!expected.equals(actual)) {
+                return Optional.empty();
+            }
+        }
 
-		return Optional.of(params);
-	}
+        return Optional.of(params);
+    }
 
-	private static List<String> split(final String path) {
-		final var cleaned = path.startsWith("/") ? path.substring(1) : path;
-		if (cleaned.isEmpty()) {
-			return List.of();
-		}
-		return Arrays.asList(cleaned.split("/"));
-	}
+    private static List<String> split(final String path) {
+        final var cleaned = path.startsWith("/") ? path.substring(1) : path;
+        if (cleaned.isEmpty()) {
+            return List.of();
+        }
+        return Arrays.asList(cleaned.split("/"));
+    }
 }

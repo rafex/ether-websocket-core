@@ -28,17 +28,17 @@ package dev.rafex.ether.websocket.core;
 
 public record WebSocketCloseStatus(int code, String reason) {
 
-	public static final WebSocketCloseStatus NORMAL = new WebSocketCloseStatus(1000, "normal");
-	public static final WebSocketCloseStatus GOING_AWAY = new WebSocketCloseStatus(1001, "going_away");
-	public static final WebSocketCloseStatus PROTOCOL_ERROR = new WebSocketCloseStatus(1002, "protocol_error");
-	public static final WebSocketCloseStatus NOT_ACCEPTABLE = new WebSocketCloseStatus(1003, "not_acceptable");
-	public static final WebSocketCloseStatus SERVER_ERROR = new WebSocketCloseStatus(1011, "server_error");
+    public static final WebSocketCloseStatus NORMAL = new WebSocketCloseStatus(1000, "normal");
+    public static final WebSocketCloseStatus GOING_AWAY = new WebSocketCloseStatus(1001, "going_away");
+    public static final WebSocketCloseStatus PROTOCOL_ERROR = new WebSocketCloseStatus(1002, "protocol_error");
+    public static final WebSocketCloseStatus NOT_ACCEPTABLE = new WebSocketCloseStatus(1003, "not_acceptable");
+    public static final WebSocketCloseStatus SERVER_ERROR = new WebSocketCloseStatus(1011, "server_error");
 
-	public WebSocketCloseStatus {
-		reason = reason == null ? "" : reason;
-	}
+    public WebSocketCloseStatus {
+        reason = reason == null ? "" : reason;
+    }
 
-	public static WebSocketCloseStatus of(final int code, final String reason) {
-		return new WebSocketCloseStatus(code, reason);
-	}
+    public static WebSocketCloseStatus of(final int code, final String reason) {
+        return new WebSocketCloseStatus(code, reason);
+    }
 }

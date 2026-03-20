@@ -31,19 +31,19 @@ import java.util.Optional;
 
 public final class WebSocketRouteMatcher {
 
-	private WebSocketRouteMatcher() {
-	}
+    private WebSocketRouteMatcher() {
+    }
 
-	public static Optional<WebSocketRouteMatch> match(final String path, final List<WebSocketRoute> routes) {
-		if (routes == null || routes.isEmpty()) {
-			return Optional.empty();
-		}
-		for (final var route : routes) {
-			final var match = WebSocketPatterns.match(route.pattern(), path);
-			if (match.isPresent()) {
-				return Optional.of(new WebSocketRouteMatch(route, match.get()));
-			}
-		}
-		return Optional.empty();
-	}
+    public static Optional<WebSocketRouteMatch> match(final String path, final List<WebSocketRoute> routes) {
+        if (routes == null || routes.isEmpty()) {
+            return Optional.empty();
+        }
+        for (final var route : routes) {
+            final var match = WebSocketPatterns.match(route.pattern(), path);
+            if (match.isPresent()) {
+                return Optional.of(new WebSocketRouteMatch(route, match.get()));
+            }
+        }
+        return Optional.empty();
+    }
 }

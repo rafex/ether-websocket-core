@@ -33,35 +33,35 @@ import java.util.concurrent.CompletionStage;
 
 public interface WebSocketSession {
 
-	String id();
+    String id();
 
-	String path();
+    String path();
 
-	String subprotocol();
+    String subprotocol();
 
-	boolean isOpen();
+    boolean isOpen();
 
-	String pathParam(String name);
+    String pathParam(String name);
 
-	String queryFirst(String name);
+    String queryFirst(String name);
 
-	List<String> queryAll(String name);
+    List<String> queryAll(String name);
 
-	String headerFirst(String name);
+    String headerFirst(String name);
 
-	Object attribute(String name);
+    Object attribute(String name);
 
-	void attribute(String name, Object value);
+    void attribute(String name, Object value);
 
-	Map<String, String> pathParams();
+    Map<String, String> pathParams();
 
-	Map<String, List<String>> queryParams();
+    Map<String, List<String>> queryParams();
 
-	Map<String, List<String>> headers();
+    Map<String, List<String>> headers();
 
-	CompletionStage<Void> sendText(String text);
+    CompletionStage<Void> sendText(String text);
 
-	CompletionStage<Void> sendBinary(ByteBuffer data);
+    CompletionStage<Void> sendBinary(ByteBuffer data);
 
-	CompletionStage<Void> close(WebSocketCloseStatus status);
+    CompletionStage<Void> close(WebSocketCloseStatus status);
 }

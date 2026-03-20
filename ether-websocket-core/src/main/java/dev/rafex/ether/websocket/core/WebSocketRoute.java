@@ -30,12 +30,12 @@ import java.util.Objects;
 
 public record WebSocketRoute(String pattern, WebSocketEndpoint endpoint) {
 
-	public WebSocketRoute {
-		Objects.requireNonNull(pattern, "pattern");
-		Objects.requireNonNull(endpoint, "endpoint");
-	}
+    public WebSocketRoute {
+        Objects.requireNonNull(pattern, "pattern");
+        Objects.requireNonNull(endpoint, "endpoint");
+    }
 
-	public static WebSocketRoute of(final String pattern, final WebSocketEndpoint endpoint) {
-		return new WebSocketRoute(pattern, endpoint);
-	}
+    public static WebSocketRoute of(final String pattern, final WebSocketEndpoint endpoint) {
+        return new WebSocketRoute(pattern, endpoint);
+    }
 }

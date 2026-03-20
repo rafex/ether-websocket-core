@@ -31,22 +31,22 @@ import java.util.Set;
 
 public interface WebSocketEndpoint {
 
-	default void onOpen(final WebSocketSession session) throws Exception {
-	}
+    default void onOpen(final WebSocketSession session) throws Exception {
+    }
 
-	default void onText(final WebSocketSession session, final String message) throws Exception {
-	}
+    default void onText(final WebSocketSession session, final String message) throws Exception {
+    }
 
-	default void onBinary(final WebSocketSession session, final ByteBuffer message) throws Exception {
-	}
+    default void onBinary(final WebSocketSession session, final ByteBuffer message) throws Exception {
+    }
 
-	default void onClose(final WebSocketSession session, final WebSocketCloseStatus closeStatus) throws Exception {
-	}
+    default void onClose(final WebSocketSession session, final WebSocketCloseStatus closeStatus) throws Exception {
+    }
 
-	default void onError(final WebSocketSession session, final Throwable error) {
-	}
+    default void onError(final WebSocketSession session, final Throwable error) {
+    }
 
-	default Set<String> subprotocols() {
-		return Set.of();
-	}
+    default Set<String> subprotocols() {
+        return Set.of();
+    }
 }

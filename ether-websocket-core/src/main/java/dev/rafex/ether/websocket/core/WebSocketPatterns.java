@@ -32,11 +32,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Utilidad para el matching de patrones de rutas WebSocket.
+ * Soporta segmentos con variables de captura entre llaves (por ejemplo, {@code /chat/{room}})
+ * y el comodín global {@code /**} que coincide con cualquier path.
+ */
 public final class WebSocketPatterns {
 
     private WebSocketPatterns() {
     }
 
+    /**
+     * Comprueba si el path dado coincide con el patrón de ruta especificado.
+     * Si coinciden, devuelve los parámetros de path extraídos como un mapa.
+     *
+     * @param pattern patrón de ruta con segmentos literales o variables {@code {nombre}}
+     * @param path    path entrante a comparar contra el patrón
+     * @return un {@link Optional} con el mapa de parámetros extraídos si hay coincidencia;
+     *         {@link Optional#empty()} si no coinciden o si los argumentos son inválidos
+     */
     public static Optional<Map<String, String>> match(final String pattern, final String path) {
         if (pattern == null || pattern.isBlank() || path == null || path.isBlank()) {
             return Optional.empty();
@@ -67,6 +81,12 @@ public final class WebSocketPatterns {
         return Optional.of(params);
     }
 
+    /**
+     * Divide un path en sus segmentos, eliminando la barra inicial si existe.
+     *
+     * @param path path a dividir (por ejemplo, {@code "/chat/room1"})
+     * @return lista de segmentos no vacíos; lista vacía si el path es raíz o vacío
+     */
     private static List<String> split(final String path) {
         final var cleaned = path.startsWith("/") ? path.substring(1) : path;
         if (cleaned.isEmpty()) {

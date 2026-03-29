@@ -29,11 +29,23 @@ package dev.rafex.ether.websocket.core;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Utilidad que resuelve la primera {@link WebSocketRoute} que coincide con un path dado.
+ * Recorre la lista de rutas en orden y retorna la primera coincidencia encontrada.
+ */
 public final class WebSocketRouteMatcher {
 
     private WebSocketRouteMatcher() {
     }
 
+    /**
+     * Busca la primera ruta de la lista cuyo patrón coincida con el path especificado.
+     *
+     * @param path   path entrante de la conexión WebSocket
+     * @param routes lista de rutas registradas; se evalúan en orden de inserción
+     * @return un {@link Optional} con el {@link WebSocketRouteMatch} si se encontró coincidencia;
+     *         {@link Optional#empty()} si la lista es nula, vacía o ninguna ruta coincide
+     */
     public static Optional<WebSocketRouteMatch> match(final String path, final List<WebSocketRoute> routes) {
         if (routes == null || routes.isEmpty()) {
             return Optional.empty();

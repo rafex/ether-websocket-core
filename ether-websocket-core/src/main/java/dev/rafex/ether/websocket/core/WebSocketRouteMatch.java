@@ -28,5 +28,9 @@ package dev.rafex.ether.websocket.core;
 
 import java.util.Map;
 
+/**
+ * Representa el resultado de una coincidencia exitosa entre un path entrante y una {@link WebSocketRoute}.
+ * Contiene la ruta que coincidió y los parámetros de path extraídos durante el matching.
+ */
 public record WebSocketRouteMatch(WebSocketRoute route, Map<String, String> pathParams) {
 }

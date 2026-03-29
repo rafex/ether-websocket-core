@@ -28,6 +28,10 @@ package dev.rafex.ether.websocket.core;
 
 import java.util.Objects;
 
+/**
+ * Vincula un patrón de ruta WebSocket con el {@link WebSocketEndpoint} que la maneja.
+ * El patrón define qué URLs entrantes activan el endpoint asociado.
+ */
 public record WebSocketRoute(String pattern, WebSocketEndpoint endpoint) {
 
     public WebSocketRoute {
@@ -35,6 +39,14 @@ public record WebSocketRoute(String pattern, WebSocketEndpoint endpoint) {
         Objects.requireNonNull(endpoint, "endpoint");
     }
 
+    /**
+     * Crea una ruta WebSocket que asocia el patrón dado con el endpoint indicado.
+     *
+     * @param pattern  patrón de ruta a comparar contra paths entrantes (por ejemplo, {@code "/chat"})
+     * @param endpoint endpoint que procesa las conexiones que coinciden con el patrón
+     * @return nueva instancia de {@code WebSocketRoute}
+     * @throws NullPointerException si {@code pattern} o {@code endpoint} son {@code null}
+     */
     public static WebSocketRoute of(final String pattern, final WebSocketEndpoint endpoint) {
         return new WebSocketRoute(pattern, endpoint);
     }

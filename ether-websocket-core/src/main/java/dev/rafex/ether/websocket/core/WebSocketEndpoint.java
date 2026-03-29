@@ -29,23 +29,68 @@ package dev.rafex.ether.websocket.core;
 import java.nio.ByteBuffer;
 import java.util.Set;
 
+/**
+ * Define el contrato de un punto final WebSocket. Las implementaciones reciben
+ * notificaciones del ciclo de vida de la conexión: apertura, mensajes de texto/binario,
+ * cierre y errores. Todos los métodos tienen una implementación vacía por defecto para
+ * que las subclases solo sobreescriban los eventos que necesiten.
+ */
 public interface WebSocketEndpoint {
 
+    /**
+     * Invocado cuando la conexión WebSocket se abre exitosamente.
+     *
+     * @param session sesión WebSocket activa
+     * @throws Exception si ocurre un error durante el procesamiento
+     */
     default void onOpen(final WebSocketSession session) throws Exception {
     }
 
+    /**
+     * Invocado cuando se recibe un mensaje de texto del cliente.
+     *
+     * @param session sesión WebSocket activa
+     * @param message contenido de texto recibido
+     * @throws Exception si ocurre un error durante el procesamiento
+     */
     default void onText(final WebSocketSession session, final String message) throws Exception {
     }
 
+    /**
+     * Invocado cuando se recibe un mensaje binario del cliente.
+     *
+     * @param session sesión WebSocket activa
+     * @param message contenido binario recibido
+     * @throws Exception si ocurre un error durante el procesamiento
+     */
     default void onBinary(final WebSocketSession session, final ByteBuffer message) throws Exception {
     }
 
+    /**
+     * Invocado cuando el cliente solicita cerrar la conexión.
+     *
+     * @param session     sesión WebSocket activa
+     * @param closeStatus estado de cierre indicado por el cliente
+     * @throws Exception si ocurre un error durante el procesamiento
+     */
     default void onClose(final WebSocketSession session, final WebSocketCloseStatus closeStatus) throws Exception {
     }
 
+    /**
+     * Invocado cuando ocurre un error en la conexión WebSocket.
+     *
+     * @param session sesión WebSocket activa
+     * @param error   excepción que causó el error
+     */
     default void onError(final WebSocketSession session, final Throwable error) {
     }
 
+    /**
+     * Devuelve el conjunto de subprotocolos WebSocket que este endpoint acepta.
+     * El servidor seleccionará un subprotocolo de esta lista durante el handshake.
+     *
+     * @return conjunto de nombres de subprotocolo soportados; vacío por defecto
+     */
     default Set<String> subprotocols() {
         return Set.of();
     }
